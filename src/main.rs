@@ -1,23 +1,34 @@
 #![feature(let_chains)]
 
+use std::collections::BTreeSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Read, Write};
 use std::path::{Path, PathBuf};
 use std::str::FromStr;
 
 use anyhow::Context;
-use tracing::{debug, error, info, trace};
+use tracing::*;
 
 mod logging;
 
 fn main() -> anyhow::Result<()> {
     logging::setup_logging();
 
-    info!("compiletest -> ui_test header migration tool running");
-    info!("usage: tool $PATH_TO_RUSTC_REPO");
+    info!("compiletest -> ui_test header migration tool");
+    info!("usage: tool $PATH_TO_COLLECTED_DIRECTIVES $PATH_TO_RUSTC_REPO");
 
-    let rustc_repo_path = std::env::args()
+    let collected_directives_path = std::env::args()
         .nth(1)
+        .expect("$PATH_TO_COLLECTED_DIRECTIVES required");
+    let collected_directives_path = PathBuf::from_str(&collected_directives_path)
+        .expect("invalid $PATH_TO_COLLECTED_DIRECTIVES");
+    debug!(?collected_directives_path);
+    assert!(
+        collected_directives_path.exists(),
+        "$PATH_TO_COLLECTED_DIRECTIVES does not exist"
+    );
+    let rustc_repo_path = std::env::args()
+        .nth(2)
         .expect("$PATH_TO_RUSTC_REPO required");
     let rustc_repo_path = PathBuf::from_str(&rustc_repo_path).expect("invalid $PATH_TO_RUSTC_REPO");
     debug!(?rustc_repo_path);
@@ -26,6 +37,13 @@ fn main() -> anyhow::Result<()> {
         "$PATH_TO_RUSTC_REPO does not exist"
     );
 
+    // Load collected headers
+    let collected_headers = std::fs::read_to_string(&collected_directives_path)
+        .context("failed to read collected headers")?;
+    let collected_headers = collected_headers.lines().collect::<BTreeSet<&str>>();
+    info!("there are {} collected headers", collected_headers.len());
+
+    // Collect paths of ui test files
     let walker = walkdir::WalkDir::new(rustc_repo_path.join("tests/ui"))
         .sort_by_file_name()
         .into_iter()
@@ -38,95 +56,46 @@ fn main() -> anyhow::Result<()> {
     let mut test_file_paths = walker.collect::<Vec<_>>();
     test_file_paths.sort();
 
-    info!("test_file_paths.len() = {}", test_file_paths.len());
+    info!("there are {} ui test files", test_file_paths.len());
 
-    for path in test_file_paths.iter().nth(0) {
-        trace!(?path);
-        let file = File::open(path).with_context(|| format!("cannot open `{:?}`", path))?;
-        let out_file = File::create(path.with_extension("rs.out"))?;
-        trace!("out_file = {:?}", path.with_extension("rs.out"));
-        let mut reader = BufReader::new(file);
-        let mut writer = BufWriter::new(out_file);
+    for path in test_file_paths.iter().take(1) {
+        debug!(?path, "processing file");
+        // - Read the contents of the ui test file
+        // - Open a named temporary file
+        // - Process each line of the ui test:
+        //     - If line starts with "//", try to match it with one of the collected directives.
+        //       If a match is found, replace "//" with "//@" and append line to temp file.
+        //     - Otherwise, append line verbatim to temp file.
+        // - Replace original ui test with temp file.
+        let ui_test_file = std::fs::File::open(&path)?;
+        let reader = std::io::BufReader::new(ui_test_file);
 
-        let mut line = String::new();
+        let mut tmp_file = tempfile::NamedTempFile::new()?;
 
-        let mut line_number = 0;
+        'line: for line in reader.lines() {
+            let line = line?;
 
-        loop {
-            line_number += 1;
-            line.clear();
-            if reader.read_line(&mut line).unwrap() == 0 {
-                break;
-            }
+            if line.trim_start().starts_with("//") {
+                let (_, rest) = line.trim_start().split_once("//").unwrap();
+                let rest = rest.trim();
 
-            // Assume that any directives will be found before the first item (which may have macro
-            // annotations) or e.g. `#![feature(..)]`.
-            let line = line.trim();
-            if line.starts_with("fn")
-                || line.starts_with("mod")
-                || line.starts_with("const")
-                || line.starts_with("static")
-                || line.starts_with("extern")
-                || line.starts_with("#")
-            {
-                write!(writer, "{}\n", line)?;
-                break;
-            }
-
-            if line.is_empty() {
-                write!(writer, "\n")?;
-            } else if let Some((start, rest)) = line.split_once("//") {
-                if start.is_empty() {
-                    // We know that the line begins with `//`, but we cannot discern if it is a
-                    // comment or directive yet. In this case, a line is a comment IF it is not a
-                    // directive.
-                    let rest = rest.trim();
-
-                    // Replace `//` with `//@`.
-                    if is_directive(path, line_number, rest) {
-                        write!(writer, "//@")?;
-                        write!(writer, "{}", rest.trim_start())?;
-                        write!(writer, "\n")?;
-                    } else {
-                        // Do not replace `//` with `//@`.
-                        write!(writer, "{}\n", line)?;
+                for header in collected_headers.iter() {
+                    if rest == *header {
+                        writeln!(tmp_file, "//@{}", rest)?;
+                        continue 'line;
                     }
-                } else {
-                    error!("unexpected line {} in file: `{:?}`", line_number, path);
-                    error!("unexpected line {}: `{}`", line_number, line);
-                    unimplemented!();
                 }
+
+                // No matched directive, very unlikely a directive and instead just a comment
+                writeln!(tmp_file, "{}", line)?;
             } else {
-                error!("unexpected line {} in file: `{:?}`", line_number, path);
-                error!("unexpected line {}: `{}`", line_number, line);
-                unimplemented!();
+                writeln!(tmp_file, "{}", line)?;
             }
         }
 
-        line.clear();
-        while reader.read_line(&mut line).unwrap() != 0 {
-            line_number += 1;
-            write!(writer, "{}", line)?;
-            line.clear();
-        }
+        let tmp_path = tmp_file.into_temp_path();
+        tmp_path.persist(path)?;
     }
 
     Ok(())
-}
-
-// TODO: incomplete
-fn is_directive(_path: &Path, _line_number: usize, s: &str) -> bool {
-    match s {
-        "run-pass" => true,
-        s if s.starts_with("ignore-") => {
-            const PLATFORMS: [&'static str; 4] = ["android", "arm", "aarch64", "windows"];
-            for plat in PLATFORMS {
-                if s == ["ignore-", plat].concat() {
-                    return true;
-                }
-            }
-            false
-        }
-        _ => false,
-    }
 }

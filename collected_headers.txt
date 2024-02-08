@@ -1,0 +1,1031 @@
+aux-build: ../ambiguous-1.rs
+aux-build: ../ambiguous-4-extern.rs
+aux-build: alias.rs
+aux-build: ambiguous-11-extern.rs
+aux-build: ambiguous-8-extern.rs
+aux-build: cfg_false_lib.rs
+aux-build: cfg_false_lib_no_std_after.rs
+aux-build: cfg_false_lib_no_std_before.rs
+aux-build: coherence_cross_crate_trait_decl.rs
+aux-build: count.rs
+aux-build: crateresolve1-1.rs
+aux-build: cross-crate.rs
+aux-build: extern-with-ambiguous-1-extern.rs
+aux-build: extern-with-ambiguous-2-extern.rs
+aux-build: extern-with-ambiguous-3-extern.rs
+aux-build: foreign-crate-macro-pat.rs
+aux-build: foreign-generic-mismatch.rs
+aux-build: foreign_trait.rs
+aux-build: issue-100199.rs
+aux-build: issue-114682-2-extern.rs
+aux-build: issue-114682-3-extern.rs
+aux-build: issue-114682-4-extern.rs
+aux-build: issue-114682-5-extern-1.rs
+aux-build: issue-114682-5-extern-2.rs
+aux-build: issue-114682-6-extern.rs
+aux-build: issue-119369-extern.rs
+aux-build: issue-72470-lib.rs
+aux-build: issue-75801.rs
+aux-build: issue-76387.rs
+aux-build: issue-83510.rs
+aux-build: issue-85992-extern-1.rs
+aux-build: issue-85992-extern-2.rs
+aux-build: issue-91800-macro.rs
+aux-build: issue_24843.rs
+aux-build: issue_67893.rs
+aux-build: issue_89119_intercrate_caching.rs
+aux-build: no-mangle-associated-fn.rs
+aux-build: p1.rs
+aux-build: p2.rs
+aux-build: post_monomorphization_error.rs
+aux-build: print-tokens.rs
+aux-build: repr-transparent-non-exhaustive.rs
+aux-build: rpitit.rs
+aux-build: rustc-rust-log-aux.rs
+aux-build: rustc_confusables_across_crate.rs
+aux-build: similar-unstable-method.rs
+aux-build: staged-api.rs
+aux-build: test-macros.rs
+aux-build: thinlto-dylib.rs
+aux-build: tls-export.rs
+aux-build: tls-rlib.rs
+aux-build: transitive_dep_three.rs
+aux-build: transitive_dep_two.rs
+aux-build:a_def_obj.rs
+aux-build:absolute.rs
+aux-build:add-impl.rs
+aux-build:allowed-through-unstable-core.rs
+aux-build:ambig_impl_2_lib.rs
+aux-build:amputate-span.rs
+aux-build:anon-extern-mod-cross-crate-1.rs
+aux-build:anon-params-edition-hygiene.rs
+aux-build:anon_const_non_local.rs
+aux-build:anon_trait_static_method_lib.rs
+aux-build:api/mod.rs
+aux-build:append-impl.rs
+aux-build:arc_wake.rs
+aux-build:assert-span-pos.rs
+aux-build:associated-const-cc-lib.rs
+aux-build:associated-types-cc-lib.rs
+aux-build:attr-args.rs
+aux-build:attr-cfg.rs
+aux-build:attr-from-macro.rs
+aux-build:attr-on-trait.rs
+aux-build:attr-stmt-expr-rpass.rs
+aux-build:attr-stmt-expr.rs
+aux-build:attribute-spans-preserved.rs
+aux-build:attributes-included.rs
+aux-build:attributes-on-definitions.rs
+aux-build:augmented_assignments.rs
+aux-build:auto_xc.rs
+aux-build:auto_xc_2.rs
+aux-build:b_reexport_obj.rs
+aux-build:bad_main_functions.rs
+aux-build:bang-macro.rs
+aux-build:bang_proc_macro2.rs
+aux-build:baz.rs
+aux-build:blind-item-mixed-crate-use-item-foo.rs
+aux-build:blind-item-mixed-crate-use-item-foo2.rs
+aux-build:builtin-attrs.rs
+aux-build:c_another_vtable_for_obj.rs
+aux-build:call-deprecated.rs
+aux-build:call-site.rs
+aux-build:cci_borrow_lib.rs
+aux-build:cci_capture_clause.rs
+aux-build:cci_class.rs
+aux-build:cci_class_2.rs
+aux-build:cci_class_3.rs
+aux-build:cci_class_4.rs
+aux-build:cci_class_5.rs
+aux-build:cci_class_6.rs
+aux-build:cci_class_cast.rs
+aux-build:cci_class_trait.rs
+aux-build:cci_const.rs
+aux-build:cci_const_block.rs
+aux-build:cci_impl_lib.rs
+aux-build:cci_intrinsic.rs
+aux-build:cci_iter_lib.rs
+aux-build:cci_nested_lib.rs
+aux-build:cci_no_inline_lib.rs
+aux-build:cfg-target-thread-local.rs
+aux-build:cfg_inner_static.rs
+aux-build:cfged_out.rs
+aux-build:cgu_test.rs
+aux-build:cgu_test_a.rs
+aux-build:cgu_test_b.rs
+aux-build:changing-crates-a1.rs
+aux-build:changing-crates-a2.rs
+aux-build:changing-crates-b.rs
+aux-build:check_static_recursion_foreign_helper.rs
+aux-build:closure-in-foreign-crate.rs
+aux-build:codegen-attrs.rs
+aux-build:coherence_copy_like_lib.rs
+aux-build:coherence_fundamental_trait_lib.rs
+aux-build:coherence_inherent_cc_lib.rs
+aux-build:coherence_lib.rs
+aux-build:coherence_orphan_lib.rs
+aux-build:collect_hidden_types.rs
+aux-build:common.rs
+aux-build:complex_impl_support.rs
+aux-build:cond_plugin.rs
+aux-build:const-stability-attribute-implies.rs
+aux-build:const_defaulty.rs
+aux-build:const_evaluatable_lib.rs
+aux-build:const_fn_lib.rs
+aux-build:const_generic_issues_lib.rs
+aux-build:const_generic_lib.rs
+aux-build:consts.rs
+aux-build:count_compound_ops.rs
+aux-build:crate-method-reexport-grrrrrrr2.rs
+aux-build:crate_a1.rs
+aux-build:crate_a2.rs
+aux-build:crate_with_invalid_spans.rs
+aux-build:crateresolve1-1.rs
+aux-build:crateresolve1-2.rs
+aux-build:crateresolve1-3.rs
+aux-build:crateresolve2-1.rs
+aux-build:crateresolve2-2.rs
+aux-build:crateresolve2-3.rs
+aux-build:crayte.rs
+aux-build:cross-crate.rs
+aux-build:cross_crate_ice.rs
+aux-build:cross_crate_ice2.rs
+aux-build:cross_crates_defaults.rs
+aux-build:ctor-stability.rs
+aux-build:ctor_aux.rs
+aux-build:custom-as-global.rs
+aux-build:custom-attr-only-one-derive.rs
+aux-build:custom-quote.rs
+aux-build:custom.rs
+aux-build:d_chain_of_rlibs_and_dylibs.rs
+aux-build:debuginfo-lto-aux.rs
+aux-build:declarations-for-tuple-field-count-errors.rs
+aux-build:def-site-async-await.rs
+aux-build:def_colliding_external.rs
+aux-build:def_external.rs
+aux-build:default_body.rs
+aux-build:default_type_params_xc.rs
+aux-build:define-macro.rs
+aux-build:dep.rs
+aux-build:depends.rs
+aux-build:deprecated-macros.rs
+aux-build:deprecation-lint.rs
+aux-build:derive-a.rs
+aux-build:derive-atob.rs
+aux-build:derive-attr-cfg.rs
+aux-build:derive-b-rpass.rs
+aux-build:derive-b.rs
+aux-build:derive-bad.rs
+aux-build:derive-clona.rs
+aux-build:derive-ctod.rs
+aux-build:derive-foo.rs
+aux-build:derive-helper-shadowed-2.rs
+aux-build:derive-helper-shadowing-2.rs
+aux-build:derive-helper-shadowing.rs
+aux-build:derive-marker-tricky.rs
+aux-build:derive-no-std.rs
+aux-build:derive-nothing.rs
+aux-build:derive-same-struct.rs
+aux-build:derive-two-attrs.rs
+aux-build:derive-union.rs
+aux-build:derive-unstable.rs
+aux-build:discr-foreign-dep.rs
+aux-build:dollar-crate-external.rs
+aux-build:dollar-crate-nested-encoding.rs
+aux-build:double.rs
+aux-build:drop-shim-relates-opaque-aux.rs
+aux-build:dropck_eyepatch_extern_crate.rs
+aux-build:duplicate.rs
+aux-build:dylib.rs
+aux-build:dyn-star-foreign.rs
+aux-build:dynamic_runner.rs
+aux-build:edition-extern-crate-allowed.rs
+aux-build:edition-gated-async-move-syntax.rs
+aux-build:edition-imports-2015.rs
+aux-build:edition-imports-2018.rs
+aux-build:edition-kw-macro-2015.rs
+aux-build:edition-kw-macro-2018.rs
+aux-build:edition-lint-infer-outlives-macro.rs
+aux-build:edition-lint-paths.rs
+aux-build:empty-crate.rs
+aux-build:empty-struct.rs
+aux-build:empty.rs
+aux-build:enums.rs
+aux-build:env.rs
+aux-build:error_lib.rs
+aux-build:example_runner.rs
+aux-build:exit-success-if-unwind.rs
+aux-build:expand-expr.rs
+aux-build:expand-with-a-macro.rs
+aux-build:explicit_self_xcrate.rs
+aux-build:exports_no_mangle.rs
+aux-build:extern-crate.rs
+aux-build:extern-crosscrate-source.rs
+aux-build:extern-issue-98562.rs
+aux-build:extern-prelude-vec.rs
+aux-build:extern-prelude.rs
+aux-build:extern-statics.rs
+aux-build:extern-take-value.rs
+aux-build:extern-types-inherent-impl.rs
+aux-build:extern-use-primitive-type-lib.rs
+aux-build:extern_calling_convention.rs
+aux-build:extern_macro_crate.rs
+aux-build:extern_mod_ordering_lib.rs
+aux-build:external-crate-var.rs
+aux-build:external_extern_fn.rs
+aux-build:external_macro.rs
+aux-build:external_unsafe_macro.rs
+aux-build:extra-item.rs
+aux-build:fancy-panic.rs
+aux-build:fat_drop.rs
+aux-build:field-method-macro.rs
+aux-build:fields.rs
+aux-build:first-second.rs
+aux-build:fn-abi.rs
+aux-build:fn-aux.rs
+aux-build:fn-dyn-aux.rs
+aux-build:foo.rs
+aux-build:foo_defn.rs
+aux-build:foreign-async-fn.rs
+aux-build:foreign-crate.rs
+aux-build:foreign-priv-aux.rs
+aux-build:foreign_lib.rs
+aux-build:forge_unsafe_block.rs
+aux-build:format-string-proc-macro.rs
+aux-build:found-staticlib.rs
+aux-build:gen-lifetime-token.rs
+aux-build:gen-macro-rules-hygiene.rs
+aux-build:gen-macro-rules.rs
+aux-build:generate-dollar-ident.rs
+aux-build:generate-mod.rs
+aux-build:generics_of_parent.rs
+aux-build:generics_of_parent_impl_trait.rs
+aux-build:gensymed.rs
+aux-build:glob-conflict-cross-crate-2-extern.rs
+aux-build:glob-conflict.rs
+aux-build:go_trait.rs
+aux-build:greeter.rs
+aux-build:hello_macro.rs
+aux-build:helper.rs
+aux-build:hidden-child.rs
+aux-build:hidden-parent.rs
+aux-build:hidden-struct.rs
+aux-build:hidden.rs
+aux-build:hygiene_example.rs
+aux-build:hygiene_example_codegen.rs
+aux-build:i8.rs
+aux-build:ident-mac.rs
+aux-build:impl-const.rs
+aux-build:impl_privacy_xc_1.rs
+aux-build:impl_privacy_xc_2.rs
+aux-build:import_crate_var.rs
+aux-build:inference_unstable_iterator.rs
+aux-build:inference_unstable_itertools.rs
+aux-build:inherited_stability.rs
+aux-build:inline_dtor.rs
+aux-build:inner_static.rs
+aux-build:intercrate.rs
+aux-build:internal.rs
+aux-build:internal_unstable.rs
+aux-build:invalid-punct-ident.rs
+aux-build:is-available.rs
+aux-build:iss.rs
+aux-build:issue-10028.rs
+aux-build:issue-104884.rs
+aux-build:issue-106126.rs
+aux-build:issue-107036.rs
+aux-build:issue-107113.rs
+aux-build:issue-11224.rs
+aux-build:issue-11225-1.rs
+aux-build:issue-11225-2.rs
+aux-build:issue-11225-3.rs
+aux-build:issue-112831-aux.rs
+aux-build:issue-11508.rs
+aux-build:issue-11529.rs
+aux-build:issue-11680.rs
+aux-build:issue-117997.rs
+aux-build:issue-119463-extern.rs
+aux-build:issue-12133-dylib.rs
+aux-build:issue-12133-dylib2.rs
+aux-build:issue-12133-rlib.rs
+aux-build:issue-12612-1.rs
+aux-build:issue-12612-2.rs
+aux-build:issue-12660-aux.rs
+aux-build:issue-13507.rs
+aux-build:issue-13560-1.rs
+aux-build:issue-13560-2.rs
+aux-build:issue-13560-3.rs
+aux-build:issue-13620-1.rs
+aux-build:issue-13620-2.rs
+aux-build:issue-13872-1.rs
+aux-build:issue-13872-2.rs
+aux-build:issue-13872-3.rs
+aux-build:issue-14344-1.rs
+aux-build:issue-14344-2.rs
+aux-build:issue-14421.rs
+aux-build:issue-14422.rs
+aux-build:issue-15562.rs
+aux-build:issue-16643.rs
+aux-build:issue-16725.rs
+aux-build:issue-16822.rs
+aux-build:issue-17662.rs
+aux-build:issue-17718-aux.rs
+aux-build:issue-17718-const-privacy.rs
+aux-build:issue-18501.rs
+aux-build:issue-18502.rs
+aux-build:issue-18514.rs
+aux-build:issue-18711.rs
+aux-build:issue-18913-1.rs
+aux-build:issue-18913-2.rs
+aux-build:issue-19163.rs
+aux-build:issue-1920.rs
+aux-build:issue-19293.rs
+aux-build:issue-19340-1.rs
+aux-build:issue-19452-aux.rs
+aux-build:issue-20389.rs
+aux-build:issue-21202.rs
+aux-build:issue-21221-3.rs
+aux-build:issue-21221-4.rs
+aux-build:issue-2170-lib.rs
+aux-build:issue-2316-a.rs
+aux-build:issue-2316-b.rs
+aux-build:issue-23563-a.rs
+aux-build:issue-2380.rs
+aux-build:issue-24106.rs
+aux-build:issue-2414-a.rs
+aux-build:issue-2414-b.rs
+aux-build:issue-24687-lib.rs
+aux-build:issue-2472-b.rs
+aux-build:issue-25185-1.rs
+aux-build:issue-25185-2.rs
+aux-build:issue-2526.rs
+aux-build:issue-25467.rs
+aux-build:issue-2631-a.rs
+aux-build:issue-2723-a.rs
+aux-build:issue-29181.rs
+aux-build:issue-29265.rs
+aux-build:issue-29485.rs
+aux-build:issue-3012-1.rs
+aux-build:issue-30123-aux.rs
+aux-build:issue-30535.rs
+aux-build:issue-3136-a.rs
+aux-build:issue-31702-1.rs
+aux-build:issue-31702-2.rs
+aux-build:issue-34796-aux.rs
+aux-build:issue-36708.rs
+aux-build:issue-36881-aux.rs
+aux-build:issue-36954.rs
+aux-build:issue-38190.rs
+aux-build:issue-38226-aux.rs
+aux-build:issue-38586.rs
+aux-build:issue-38875-b.rs
+aux-build:issue-3907.rs
+aux-build:issue-3979-traits.rs
+aux-build:issue-39823.rs
+aux-build:issue-39889.rs
+aux-build:issue-41053.rs
+aux-build:issue-41394.rs
+aux-build:issue-41549.rs
+aux-build:issue-41652-b.rs
+aux-build:issue-42007-s.rs
+aux-build:issue-4208-cc.rs
+aux-build:issue-42708.rs
+aux-build:issue-4545.rs
+aux-build:issue-45829-a.rs
+aux-build:issue-45829-b.rs
+aux-build:issue-48984-aux.rs
+aux-build:issue-49544.rs
+aux-build:issue-50061.rs
+aux-build:issue-50493.rs
+aux-build:issue-51798.rs
+aux-build:issue-52489.rs
+aux-build:issue-52891.rs
+aux-build:issue-53691.rs
+aux-build:issue-5518.rs
+aux-build:issue-5521.rs
+aux-build:issue-55811.rs
+aux-build:issue-56125.rs
+aux-build:issue-56596-2.rs
+aux-build:issue-56596.rs
+aux-build:issue-56943.rs
+aux-build:issue-57264-1.rs
+aux-build:issue-57264-2.rs
+aux-build:issue-57271-lib.rs
+aux-build:issue-5844-aux.rs
+aux-build:issue-59764.rs
+aux-build:issue-60674.rs
+aux-build:issue-61963-1.rs
+aux-build:issue-61963.rs
+aux-build:issue-63226.rs
+aux-build:issue-66286.rs
+aux-build:issue-69725.rs
+aux-build:issue-7178.rs
+aux-build:issue-73112.rs
+aux-build:issue-75907.rs
+aux-build:issue-75982.rs
+aux-build:issue-7899.rs
+aux-build:issue-79242.rs
+aux-build:issue-79825.rs
+aux-build:issue-80079.rs
+aux-build:issue-8044.rs
+aux-build:issue-81839.rs
+aux-build:issue-81943-lib.rs
+aux-build:issue-8259.rs
+aux-build:issue-8401.rs
+aux-build:issue-89971-outer-attr-following-inner-attr-ice.rs
+aux-build:issue-9123.rs
+aux-build:issue-9155.rs
+aux-build:issue-91763-aux.rs
+aux-build:issue-9188.rs
+aux-build:issue-92755.rs
+aux-build:issue-94287-aux.rs
+aux-build:issue-97708-aux.rs
+aux-build:issue-9906.rs
+aux-build:issue-9968.rs
+aux-build:issue_76375_aux.rs
+aux-build:key-value-expansion.rs
+aux-build:kinds_in_metadata.rs
+aux-build:legacy-const-generics.rs
+aux-build:legacy_interaction.rs
+aux-build:lib.rs
+aux-build:lifetime_bound_will_change_warning_lib.rs
+aux-build:lifetimes-rpass.rs
+aux-build:lifetimes.rs
+aux-build:link-cfg-works-transitive-dylib.rs
+aux-build:link-cfg-works-transitive-rlib.rs
+aux-build:linkage1.rs
+aux-build:lint-stability-reexport.rs
+aux-build:lint-stability.rs
+aux-build:lint_output_format.rs
+aux-build:lint_stability.rs
+aux-build:lint_stability_fields.rs
+aux-build:lint_unused_extern_crate.rs
+aux-build:lint_unused_extern_crate2.rs
+aux-build:lint_unused_extern_crate3.rs
+aux-build:lint_unused_extern_crate4.rs
+aux-build:lint_unused_extern_crate5.rs
+aux-build:lints-in-foreign-macros.rs
+aux-build:llvm_pr32379.rs
+aux-build:local_inner_macros.rs
+aux-build:lto-duplicate-symbols1.rs
+aux-build:lto-duplicate-symbols2.rs
+aux-build:lto-rustc-loads-linker-plugin.rs
+aux-build:m1.rs
+aux-build:m2.rs
+aux-build:macro-def-site-super.rs
+aux-build:macro-dump-debug.rs
+aux-build:macro-in-other-crate.rs
+aux-build:macro-only-syntax.rs
+aux-build:macro-use-warned-against.rs
+aux-build:macro-use-warned-against2.rs
+aux-build:macro_crate_def_only.rs
+aux-build:macro_crate_nonterminal.rs
+aux-build:macro_export_inner_module.rs
+aux-build:macro_with_super_1.rs
+aux-build:main_functions.rs
+aux-build:make-macro.rs
+aux-build:match_non_exhaustive_lib.rs
+aux-build:meow.rs
+aux-build:meta-delim.rs
+aux-build:meta-macro.rs
+aux-build:metadata-sufficient-for-layout.rs
+aux-build:method_self_arg1.rs
+aux-build:method_self_arg2.rs
+aux-build:methods.rs
+aux-build:mir_external_refs.rs
+aux-build:missing-assoc-fn-applicable-suggestions.rs
+aux-build:missing-item-sugg.rs
+aux-build:missing_docs.rs
+aux-build:mixed-site-span.rs
+aux-build:modify-ast.rs
+aux-build:monovariants.rs
+aux-build:moves_based_on_type_lib.rs
+aux-build:msvc-data-only-lib.rs
+aux-build:msvc-imp-present.rs
+aux-build:multiple-derives.rs
+aux-build:multispan.rs
+aux-build:must-use-foreign.rs
+aux-build:my_crate.rs
+aux-build:namespace-mix.rs
+aux-build:namespaced_enum_emulate_flat.rs
+aux-build:namespaced_enums.rs
+aux-build:needs-abort.rs
+aux-build:needs-panic-runtime.rs
+aux-build:needs-unwind.rs
+aux-build:needs_hygiene.rs
+aux-build:negative-token.rs
+aux-build:nested-dollar-crate.rs
+aux-build:nested-fn-macro.rs
+aux-build:nested-macro-rules.rs
+aux-build:nested_item.rs
+aux-build:newtype_struct_xc.rs
+aux-build:no_debug.rs
+aux-build:no_method_suggested_traits.rs
+aux-build:noexporttypelib.rs
+aux-build:non-exhaustive.rs
+aux-build:nonterminal-recollect-attr.rs
+aux-build:not-joint.rs
+aux-build:not-libstd.rs
+aux-build:not-object-safe.rs
+aux-build:offset-of-staged-api.rs
+aux-build:on_structs_and_enums_xc.rs
+aux-build:opaque-hygiene.rs
+aux-build:option_future.rs
+aux-build:or-pattern.rs
+aux-build:orphan-check-diagnostics.rs
+aux-build:other.rs
+aux-build:other_file.rs
+aux-build:overlapping_pub_trait_source.rs
+aux-build:overloaded_autoderef_xc.rs
+aux-build:overloading_xc.rs
+aux-build:packed.rs
+aux-build:panic-runtime-abort.rs
+aux-build:panic-runtime-lang-items.rs
+aux-build:panic-runtime-unwind.rs
+aux-build:panic-runtime-unwind2.rs
+aux-build:param-attrs.rs
+aux-build:parent-source-spans.rs
+aux-build:ping.rs
+aux-build:png2.rs
+aux-build:priv-impl-prim-ty.rs
+aux-build:privacy-struct-ctor.rs
+aux-build:privacy_reexport.rs
+aux-build:privacy_tuple_struct.rs
+aux-build:private-inferred-type.rs
+aux-build:private-trait-xc.rs
+aux-build:private-use-macro.rs
+aux-build:proc-macro-helper.rs
+aux-build:proc-macro-panic.rs
+aux-build:proc-macro-type-error.rs
+aux-build:proc-macro.rs
+aux-build:proc_macro_def.rs
+aux-build:proc_macro_sequence.rs
+aux-build:promotable_const_fn_lib.rs
+aux-build:pub-and-stability.rs
+aux-build:pub_dep.rs
+aux-build:pub_hygiene.rs
+aux-build:pub_restricted.rs
+aux-build:pub_static_array.rs
+aux-build:pub_use_mods_xcrate.rs
+aux-build:pub_use_xcrate1.rs
+aux-build:pub_use_xcrate2.rs
+aux-build:raw-ident.rs
+aux-build:rbmtp_cross_crate_lib.rs
+aux-build:re-export.rs
+aux-build:re_rebalance_coherence_lib-rpass.rs
+aux-build:re_rebalance_coherence_lib.rs
+aux-build:reachable-unnameable-items.rs
+aux-build:recursive_reexports.rs
+aux-build:redundant-semi-proc-macro-def.rs
+aux-build:reexported_static_methods.rs
+aux-build:remapped_dep.rs
+aux-build:remove-extern-crate.rs
+aux-build:removing-extern-crate.rs
+aux-build:repeat.rs
+aux-build:reserved-prefixes-macro-2018.rs
+aux-build:reserved-prefixes-macro-2021.rs
+aux-build:resolved-located-at.rs
+aux-build:rmeta-meta.rs
+aux-build:rmeta-rlib.rs
+aux-build:same-file-in-two-crates-aux.rs
+aux-build:send_sync.rs
+aux-build:sepcomp-extern-lib.rs
+aux-build:sepcomp_cci_lib.rs
+aux-build:sepcomp_lib.rs
+aux-build:sigpipe-utils.rs
+aux-build:some-panic-impl.rs
+aux-build:some_crate.rs
+aux-build:span-api-tests.rs
+aux-build:span-from-proc-macro.rs
+aux-build:span-test-macros.rs
+aux-build:specialization-trait.rs
+aux-build:specialization_cross_crate.rs
+aux-build:stability-attribute-implies.rs
+aux-build:stability-cfg2.rs
+aux-build:stability.rs
+aux-build:stability_attribute_issue.rs
+aux-build:stability_cfg1.rs
+aux-build:stable-in-unstable-core.rs
+aux-build:stable-in-unstable-std.rs
+aux-build:static-function-pointer-aux.rs
+aux-build:static-methods-crate.rs
+aux-build:static_cross_crate.rs
+aux-build:static_fn_inline_xc_aux.rs
+aux-build:static_fn_trait_xc_aux.rs
+aux-build:static_init_aux.rs
+aux-build:static_mut_xc.rs
+aux-build:static_priv_by_default.rs
+aux-build:stdlib-prelude.rs
+aux-build:struct_destructuring_cross_crate.rs
+aux-build:struct_field_privacy.rs
+aux-build:struct_variant_privacy.rs
+aux-build:struct_variant_xc_aux.rs
+aux-build:structs.rs
+aux-build:subspan.rs
+aux-build:suggest-constructor-cycle-error.rs
+aux-build:suggestions-not-always-applicable.rs
+aux-build:svh-a-base.rs
+aux-build:svh-a-change-lit.rs
+aux-build:svh-a-change-significant-cfg.rs
+aux-build:svh-a-change-trait-bound.rs
+aux-build:svh-a-change-type-arg.rs
+aux-build:svh-a-change-type-ret.rs
+aux-build:svh-a-change-type-static.rs
+aux-build:svh-b.rs
+aux-build:svh-uta-base.rs
+aux-build:svh-uta-change-use-trait.rs
+aux-build:svh-utb.rs
+aux-build:system-allocator.rs
+aux-build:system-allocator2.rs
+aux-build:tab_column_numbers.rs
+aux-build:tdticc_coherence_lib.rs
+aux-build:test-macros.rs
+aux-build:test_macro.rs
+aux-build:thin-lto-inlines-aux.rs
+aux-build:thread-local-extern-static.rs
+aux-build:three-equals.rs
+aux-build:tokyo.rs
+aux-build:trait-import-suggestions.rs
+aux-build:trait-with-const-param.rs
+aux-build:trait_impl_conflict.rs
+aux-build:trait_object_lt_defaults_lib.rs
+aux-build:trait_safety_lib.rs
+aux-build:trait_superkinds_in_metadata.rs
+aux-build:traitimpl.rs
+aux-build:transparent-basic.rs
+aux-build:trivial-cast-ice.rs
+aux-build:trivial3.rs
+aux-build:trivial4.rs
+aux-build:two_macros-rpass.rs
+aux-build:two_macros.rs
+aux-build:type_dependent_lib.rs
+aux-build:typeid-intrinsic-aux1.rs
+aux-build:typeid-intrinsic-aux2.rs
+aux-build:types.rs
+aux-build:ufuncs.rs
+aux-build:unaligned_references_external_crate.rs
+aux-build:unboxed-closures-cross-crate.rs
+aux-build:underscore-imports.rs
+aux-build:unhygienic_example.rs
+aux-build:uninhabited.rs
+aux-build:union.rs
+aux-build:unnamed_pub_trait_source.rs
+aux-build:unreachable_variant.rs
+aux-build:unstable-macros.rs
+aux-build:unstable.rs
+aux-build:unstable_generic_param.rs
+aux-build:unwind-aux.rs
+aux-build:upstream_alias.rs
+aux-build:use-from-trait-xc.rs
+aux-build:use-macro-self.rs
+aux-build:use_by_macro.rs
+aux-build:using-target-feature-unstable.rs
+aux-build:variant-namespacing.rs
+aux-build:variants.rs
+aux-build:ver-cfg-rel.rs
+aux-build:wants-panic-runtime-abort.rs
+aux-build:wants-panic-runtime-unwind.rs
+aux-build:weak-lang-items.rs
+aux-build:weird-hygiene.rs
+aux-build:where_clauses_xc.rs
+aux-build:xc-private-method-lib.rs
+aux-build:xc.rs
+aux-build:xc_2.rs
+aux-build:xc_call.rs
+aux-build:xcrate-issue-43189-a.rs
+aux-build:xcrate-issue-43189-b.rs
+aux-build:xcrate-issue-46112-rexport-core.rs
+aux-build:xcrate-issue-61711-b.rs
+aux-build:xcrate-reachable.rs
+aux-build:xcrate-trait-lifetime-param.rs
+aux-build:xcrate.rs
+aux-build:xcrate_address_insignificant.rs
+aux-build:xcrate_associated_type_defaults.rs
+aux-build:xcrate_generic_fn_nested_return.rs
+aux-build:xcrate_static_addresses.rs
+aux-build:xcrate_struct_aliases.rs
+aux-build:xcrate_unit_struct.rs
+aux-crate:aux=assoc-inherent-unstable.rs
+aux-crate:bar=bar.rs
+aux-crate:barbar=bar.rs
+aux-crate:doc_hidden_fields=doc-hidden-fields.rs
+aux-crate:eager=eager.rs
+aux-crate:force:panic_handler=panic_handler.rs
+aux-crate:issue_55779_extern_trait=issue-55779-extern-trait.rs
+aux-crate:issue_59191=issue-59191.rs
+aux-crate:issue_80074=issue-80074-macro.rs
+aux-crate:issue_80074_2=issue-80074-macro-2.rs
+aux-crate:issue_87932_a=issue-87932-a.rs
+aux-crate:lazy=lazy.rs
+aux-crate:library=library.rs
+aux-crate:noprelude:somedep=somedep.rs
+aux-crate:nounused:somedep=somedep.rs
+aux-crate:panic_handler=panic_handler.rs
+aux-crate:priv,noprelude:somedep=somedep.rs
+aux-crate:priv:priv_dep=priv_dep.rs
+aux-crate:priv:somedep=somedep.rs
+aux-crate:reexported_trait=reexported-trait.rs
+aux-crate:somedep=somedep.rs
+aux-crate:test_macros=test-macros.rs
+ignore-64bit
+ignore-llvm-version: 18 - 99
+ignore-macos
+ignore-macos no extern_weak linkage
+ignore-macos this is supposed to succeed on osx
+ignore-nightly
+ignore-test
+ignore-test (#54987)
+ignore-test (#92000)
+ignore-test (auxiliary, used by other tests)
+ignore-test (rustfix needs multiple suggestions)
+ignore-test -- this is an auxiliary file as part of another test.
+ignore-test FIXME(81658, 83171)
+ignore-test Not a test. Used by issue-48508.rs
+ignore-test Not a test. Used by other tests
+ignore-test auxiliary file for expansion-time.rs
+ignore-test auxiliary file for include-single-expr.rs
+ignore-test not a test, auxiliary
+ignore-test not a test. aux file
+ignore-test this is just a helper for the real test in this dir
+ignore-test this is not a test
+ignore-test: not a test
+ignore-test: not a test, used by backtrace-debuginfo.rs to test file!()
+ignore-test: not a test, used by non_modrs_mods.rs
+ignore-test: this is an auxiliary file for circular-modules-main.rs
+min-llvm-version: 17
+min-llvm-version: 18
+needs-asm-support
+needs-dlltool
+needs-dynamic-linking
+needs-llvm-components:
+needs-llvm-components: aarch64
+needs-llvm-components: arm
+needs-llvm-components: avr
+needs-llvm-components: bpf
+needs-llvm-components: hexagon
+needs-llvm-components: loongarch
+needs-llvm-components: m68k
+needs-llvm-components: mips
+needs-llvm-components: msp430
+needs-llvm-components: nvptx
+needs-llvm-components: powerpc
+needs-llvm-components: riscv
+needs-llvm-components: sparc
+needs-llvm-components: systemz
+needs-llvm-components: webassembly
+needs-llvm-components: x86
+needs-relocation-model-pic
+needs-run-enabled
+needs-sanitizer-address
+needs-sanitizer-cfi
+needs-sanitizer-leak
+needs-sanitizer-thread
+needs-unwind
+needs-unwind Asserting on contents of error message
+needs-unwind Size of Closures change on panic=abort
+needs-unwind Size of Futures change on panic=abort
+needs-unwind proc macro panics to report errors
+needs-unwind since it affects the error output
+needs-unwind this test checks that a destructor is called after panicking
+needs-unwind uses catch_unwind
+only-32bit too impatient for 2⁶⁴ items
+only-aarch64
+only-gnu
+only-i686-pc-windows-msvc
+only-linux
+only-msvc
+only-wasm32
+only-windows
+only-windows - the number of `Error` impls is platform-dependent
+only-x86
+only-x86_64-pc-windows-msvc
+only-x86_64-unknown-linux-gnu
+revisions: BADFLAGS BADTARGET
+revisions: a
+revisions: aarch64
+revisions: aarch64 riscv64imac riscv64gc x86_64
+revisions: aarch64 x32 x64
+revisions: aarch64 x86-64
+revisions: aarch64 x86_64
+revisions: aarch64-neon aarch64-sve2
+revisions: address cfi kcfi leak memory thread
+revisions: afn cls nofeat
+revisions: afn nofeat
+revisions: all inline merge1 merge2
+revisions: all strong basic
+revisions: allow expect
+revisions: allowed disallowed
+revisions: angle paren ok elision
+revisions: any_lt static_lt
+revisions: anything_else
+revisions: arm
+revisions: assume no_assume
+revisions: attribute option
+revisions: avr msp430
+revisions: b00001 b00010 b00011 b00100 b00101 b00110 b00111 b01000 b01001 b01100 b01101 b10000 b10001 b10010 b10011 b10101 b10111 b11000 b11001 b11101
+revisions: base
+revisions: base extended
+revisions: base polonius
+revisions: base ul
+revisions: blank bad
+revisions: bound_a_b_ret_a_vs_bound_a_ret_a
+revisions: bound_a_b_vs_bound_a
+revisions: bound_a_vs_bound_a
+revisions: bound_a_vs_bound_b
+revisions: bound_a_vs_free_x
+revisions: bound_co_a_b_vs_bound_co_a
+revisions: bound_co_a_co_b_ret_contra_a
+revisions: bound_co_a_vs_bound_co_b
+revisions: bound_contra_a_contra_b_ret_co_a
+revisions: bound_inv_a_b_vs_bound_inv_a
+revisions: bound_inv_a_vs_bound_inv_b
+revisions: bpf
+revisions: bpf ptx
+revisions: branch except-unused-functions except-unused-generics
+revisions: cargo rustc
+revisions: cfg no
+revisions: check build
+revisions: classic coherence next
+revisions: classic next
+revisions: compat no-compat
+revisions: constant array
+revisions: curr object_safe_for_dispatch
+revisions: current
+revisions: current negative
+revisions: current next
+revisions: default -Zmacro-backtrace
+revisions: default edition2021
+revisions: default feature
+revisions: default generic_const_items
+revisions: default mir-opt
+revisions: default miropt
+revisions: default nomiropt
+revisions: default sa
+revisions: default strict
+revisions: default unleash
+revisions: default y yes on true all
+revisions: deny
+revisions: deny allow
+revisions: duplicate deduplicate
+revisions: e2015 e2018 e2021 e2024
+revisions: e2018 e2021
+revisions: e2021 e2024
+revisions: e2024 none
+revisions: edition2015 edition2018
+revisions: edition2015 edition2021
+revisions: edition_2015 edition_2021
+revisions: empty_cfg feature full
+revisions: empty_cfg without_names
+revisions: explicit implicit
+revisions: fail pass
+revisions: fallback constrain
+revisions: feature gated
+revisions: foo bar
+revisions: free_inv_x_vs_free_inv_y
+revisions: free_x_vs_free_x
+revisions: free_x_vs_free_y
+revisions: full gce
+revisions: full generic_arg
+revisions: full min
+revisions: func object clause
+revisions: good bad
+revisions: good1 good2 bad1 bad2
+revisions: good1 good2 good3
+revisions: host
+revisions: i686
+revisions: ident_in_values_2 unknown_meta_item_1 unknown_meta_item_2 unknown_meta_item_3
+revisions: imported unimported
+revisions: incremental threads
+revisions: is_send not_send
+revisions: item local region
+revisions: leak noleak
+revisions: legacy legacy-ok hashed hashed-ok
+revisions: legacy v0
+revisions: legacy verbose-legacy
+revisions: lib usage
+revisions: local remapped
+revisions: local-self remapped-self
+revisions: locally_eager locally_lazy
+revisions: loongarch64
+revisions: m68k
+revisions: main_ty main_args main_ret argc argv_inner_ptr argv sigpipe
+revisions: matchck eval1 eval2
+revisions: min
+revisions: mips
+revisions: mips64
+revisions: mir codegen
+revisions: mismatch mismatch_async too_many too_few lt
+revisions: missing_all_args missing_sigpipe_arg missing_ret start_ret too_many_args
+revisions: mixed_values_any mixed_any any_values giberich unterminated
+revisions: multiple_values_any not_empty_any not_empty_values_any
+revisions: n no off false zero
+revisions: new old
+revisions: next old
+revisions: nll polonius
+revisions: nll_target
+revisions: nn ny yn yy
+revisions: no thin fat
+revisions: no yes
+revisions: no-opt inline
+revisions: no-value blank bad
+revisions: no0 no1 no2 no3 thin0 thin1 thin2 thin3 fat0 fat1 fat2  fat3
+revisions: no_flag with_flag
+revisions: nofallback fallback
+revisions: none_not_empty cfg_none
+revisions: noopt opt opt_with_overflow_checks
+revisions: normal exh_pats
+revisions: normal exhaustive_patterns
+revisions: normal expanded
+revisions: normal feature
+revisions: normal lint
+revisions: normal min_exh_pats exhaustive_patterns
+revisions: normal mir-opt
+revisions: normal opt
+revisions: normal over_aligned
+revisions: normal randomize-layout
+revisions: normal verbose
+revisions: normal with-diagnostic-scope without-diagnostic-scope
+revisions: normal with-macro-scope without-macro-scope
+revisions: normalize_param_env normalize_obligation
+revisions: not_static yes_static
+revisions: ok bad
+revisions: ok oneuse transmute krisskross
+revisions: old generic generic_with_fn
+revisions: old new
+revisions: old new e2024
+revisions: old next
+revisions: one many
+revisions: one two three
+revisions: opt noopt
+revisions: opt0 opt1
+revisions: or1 or2 or3 or4 or5
+revisions: param_ty lifetime param_ty_no_compat lifetime_no_compat
+revisions: pass fail
+revisions: pass pass_next fail
+revisions: pass pass_sound fail
+revisions: pos neg
+revisions: powerpc64
+revisions: quiet verbose
+revisions: re_a re_b re_c
+revisions: rev1 rev2
+revisions: riscv
+revisions: riscv32 riscv64
+revisions: ropi rwpi
+revisions: rpitit assoc_ty
+revisions: rust2015 rust2018
+revisions: s390x
+revisions: self_infer no_self_infer
+revisions: shadowed uncovered
+revisions: sig local structure ok elision
+revisions: simple adt_const_params
+revisions: simple mixed empty
+revisions: simple mixed with_values
+revisions: size align
+revisions: sized clone
+revisions: small kernel medium large
+revisions: some none
+revisions: sparc
+revisions: sparc64
+revisions: ssp no-ssp
+revisions: stable unstable
+revisions: std core
+revisions: stock gated
+revisions: stock gated stocknc gatednc
+revisions: stock gce
+revisions: stock mut_refs
+revisions: stock precise
+revisions: stock specialized
+revisions: stock with_negative_coherence
+revisions: string_for_name_1 string_for_name_2 multiple_any multiple_values
+revisions: success failure
+revisions: tait rpit
+revisions: twenty_eighteen twenty_twentyone
+revisions: unconstrained constrained
+revisions: unoptimized optimized
+revisions: unqualified qualified
+revisions: v0
+revisions: values_any_missing_values values_any_before_ident ident_in_values_1
+revisions: values_before values_after
+revisions: verbose normal
+revisions: warn allow
+revisions: warn_deny forbid_warn force_warn_deny
+revisions: wasi
+revisions: wasm
+revisions: wfcheck borrowck
+revisions: windows not-windows
+revisions: with without
+revisions: with-generic-asset without-generic-asset
+revisions: with_clause without_clause
+revisions: with_feature without_feature
+revisions: with_gate no_gate
+revisions: works fails
+revisions: x64 i686 aarch64 arm riscv32 riscv64
+revisions: x64 x32
+revisions: x86 x86_64 aarch64
+revisions: x86-64
+revisions: x86-64-win
+revisions: x86_64 aarch64
+revisions: x86_64 arm arm_llvm_18
+revisions: yy yn ny nn
+revisions:verbose normal
+should-fail
