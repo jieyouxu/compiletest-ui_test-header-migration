@@ -1,12 +1,12 @@
 #![feature(let_chains)]
 
 use std::collections::BTreeSet;
-use std::fs::File;
-use std::io::{BufRead, BufReader, BufWriter, Read, Write};
-use std::path::{Path, PathBuf};
+use std::io::{BufRead, Write};
+use std::path::PathBuf;
 use std::str::FromStr;
 
 use anyhow::Context;
+use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
 use tracing::*;
 
 mod logging;
@@ -62,7 +62,15 @@ fn main() -> anyhow::Result<()> {
         collected_header_paths.len()
     );
 
-    for path in collected_header_paths {
+    let pb = ProgressBar::new(collected_header_paths.len() as u64);
+    pb.set_style(
+        ProgressStyle::with_template(
+            "collecting headers: {spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] ({pos}/{len}, ETA {eta})",
+        )
+        .unwrap(),
+    );
+
+    for path in collected_header_paths.iter().progress_with(pb) {
         debug!(?path, "processing collected header");
         let file = std::fs::File::open(&path)?;
         let reader = std::io::BufReader::new(file);
@@ -89,7 +97,15 @@ fn main() -> anyhow::Result<()> {
 
     info!("there are {} ui test files", test_file_paths.len());
 
-    for path in test_file_paths {
+    let pb = ProgressBar::new(test_file_paths.len() as u64);
+    pb.set_style(
+        ProgressStyle::with_template(
+            "migrating ui tests: {spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] ({pos}/{len}, ETA {eta})",
+        )
+        .unwrap(),
+    );
+
+    for path in test_file_paths.iter().progress_with(pb) {
         debug!(?path, "processing file");
         // - Read the contents of the ui test file
         // - Open a named temporary file

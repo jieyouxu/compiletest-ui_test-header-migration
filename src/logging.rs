@@ -13,7 +13,7 @@ pub(crate) fn setup_logging() {
         .without_time()
         .with_filter(
             EnvFilter::builder()
-                .with_default_directive(LevelFilter::DEBUG.into())
+                .with_default_directive(LevelFilter::WARN.into())
                 .from_env_lossy(),
         );
     let subscriber = tracing_subscriber::registry().with(stderr_log);
