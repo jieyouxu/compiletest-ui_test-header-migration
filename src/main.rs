@@ -80,6 +80,8 @@ fn main() -> anyhow::Result<()> {
         }
     }
 
+    collected_headers.retain(|header| header.trim() != "//");
+
     info!("there are {} collected headers", collected_headers.len());
 
     // Collect paths of ui test files
@@ -123,12 +125,11 @@ fn main() -> anyhow::Result<()> {
             let line = line?;
 
             if line.trim_start().starts_with("//") {
-                let (_, rest) = line.trim_start().split_once("//").unwrap();
-                let rest = rest.trim();
+                let Some((before, after)) = line.split_once("//").unwrap();
 
                 for header in collected_headers.iter() {
                     if rest == *header {
-                        writeln!(tmp_file, "//@{}", rest)?;
+                        writeln!(tmp_file, "{}//@{}", before, after)?;
                         continue 'line;
                     }
                 }
