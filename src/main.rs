@@ -80,7 +80,7 @@ fn main() -> anyhow::Result<()> {
         }
     }
 
-    collected_headers.retain(|header| header.trim() != "//");
+    collected_headers.retain(|header| !header.trim().is_empty() && header.trim() != "//");
 
     info!("there are {} collected headers", collected_headers.len());
 
@@ -125,10 +125,10 @@ fn main() -> anyhow::Result<()> {
             let line = line?;
 
             if line.trim_start().starts_with("//") {
-                let Some((before, after)) = line.split_once("//").unwrap();
+                let (before, after) = line.split_once("//").unwrap();
 
                 for header in collected_headers.iter() {
-                    if rest == *header {
+                    if line == *header {
                         writeln!(tmp_file, "{}//@{}", before, after)?;
                         continue 'line;
                     }
