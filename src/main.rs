@@ -15,20 +15,12 @@ fn main() -> anyhow::Result<()> {
     logging::setup_logging();
 
     info!("compiletest -> ui_test header migration tool");
-    info!("usage: tool $PATH_TO_COLLECTED_DIRECTIVES $PATH_TO_RUSTC_REPO");
+    info!("usage: cargo r -- $PATH_TO_RUSTC_REPO");
 
-    let collected_directives_path = std::env::args()
-        .nth(1)
-        .expect("$PATH_TO_COLLECTED_DIRECTIVES required");
-    let collected_directives_path = PathBuf::from_str(&collected_directives_path)
-        .expect("invalid $PATH_TO_COLLECTED_DIRECTIVES");
-    debug!(?collected_directives_path);
-    assert!(
-        collected_directives_path.exists(),
-        "$PATH_TO_COLLECTED_DIRECTIVES does not exist"
-    );
+    const TARGET: &str = "x86_64-apple-darwin";
+
     let rustc_repo_path = std::env::args()
-        .nth(2)
+        .nth(1)
         .expect("$PATH_TO_RUSTC_REPO required");
     let rustc_repo_path = PathBuf::from_str(&rustc_repo_path).expect("invalid $PATH_TO_RUSTC_REPO");
     debug!(?rustc_repo_path);
@@ -37,10 +29,49 @@ fn main() -> anyhow::Result<()> {
         "$PATH_TO_RUSTC_REPO does not exist"
     );
 
-    // Load collected headers
-    let collected_headers = std::fs::read_to_string(&collected_directives_path)
-        .context("failed to read collected headers")?;
-    let collected_headers = collected_headers.lines().collect::<BTreeSet<&str>>();
+    let mut collected_headers_path = PathBuf::new();
+    collected_headers_path.push(&rustc_repo_path);
+    collected_headers_path.push("build");
+    collected_headers_path.push(TARGET);
+    collected_headers_path.push("test/ui");
+    collected_headers_path.push("__directive_lines");
+
+    // Load collected headers (mainly EarlyProps)
+    debug!(early_headers_path = ?collected_headers_path.with_extension("txt"));
+    let early_collected_headers =
+        std::fs::read_to_string(collected_headers_path.with_extension("txt"))
+            .context("failed to read collected headers")?;
+    let mut collected_headers = early_collected_headers
+        .lines()
+        .map(ToOwned::to_owned)
+        .collect::<BTreeSet<String>>();
+
+    // Load collected headers (from TestProps collected from each ran UI test)
+    let collected_headers_walker = walkdir::WalkDir::new(collected_headers_path.with_extension(""))
+        .sort_by_file_name()
+        .into_iter()
+        .filter_map(Result::ok)
+        .filter(|e| !e.file_type().is_dir())
+        .map(|e| e.into_path());
+
+    let mut collected_header_paths = collected_headers_walker.collect::<Vec<_>>();
+    collected_header_paths.sort();
+
+    info!(
+        "there are {} collected header files",
+        collected_header_paths.len()
+    );
+
+    for path in collected_header_paths {
+        debug!(?path, "processing collected header");
+        let file = std::fs::File::open(&path)?;
+        let reader = std::io::BufReader::new(file);
+        for line in reader.lines() {
+            let line = line?;
+            collected_headers.insert(line);
+        }
+    }
+
     info!("there are {} collected headers", collected_headers.len());
 
     // Collect paths of ui test files
