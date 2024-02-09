@@ -58,7 +58,7 @@ fn main() -> anyhow::Result<()> {
 
     info!("there are {} ui test files", test_file_paths.len());
 
-    for path in test_file_paths.iter().take(1) {
+    for path in test_file_paths {
         debug!(?path, "processing file");
         // - Read the contents of the ui test file
         // - Open a named temporary file
