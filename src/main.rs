@@ -117,28 +117,34 @@ fn main() -> anyhow::Result<()> {
         //     - Otherwise, append line verbatim to temp file.
         // - Replace original ui test with temp file.
         let ui_test_file = std::fs::File::open(&path)?;
-        let reader = std::io::BufReader::new(ui_test_file);
+        let mut reader = std::io::BufReader::new(ui_test_file);
 
         let mut tmp_file = tempfile::NamedTempFile::new()?;
 
-        'line: for line in reader.lines() {
-            let line = line?;
+        let mut line_buf = String::new();
+        'line: loop {
+            line_buf.clear();
+            let bytes_read = reader.read_line(&mut line_buf)?;
+            if bytes_read == 0 {
+                break;
+            }
 
-            if line.trim_start().starts_with("//") {
-                let (before, after) = line.split_once("//").unwrap();
+            if line_buf.trim_start().starts_with("//") {
+                let (before, after) = line_buf.split_once("//").unwrap();
 
                 for header in collected_headers.iter() {
-                    if line == *header {
-                        writeln!(tmp_file, "{}//@{}", before, after)?;
+                    if line_buf == *header {
+                        write!(tmp_file, "{}//@{}", before, after)?;
                         continue 'line;
                     }
                 }
 
                 // No matched directive, very unlikely a directive and instead just a comment
-                writeln!(tmp_file, "{}", line)?;
+                write!(tmp_file, "{}", line_buf)?;
             } else {
-                writeln!(tmp_file, "{}", line)?;
+                write!(tmp_file, "{}", line_buf)?;
             }
+
         }
 
         let tmp_path = tmp_file.into_temp_path();
