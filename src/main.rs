@@ -133,7 +133,7 @@ fn main() -> anyhow::Result<()> {
                 let (before, after) = line_buf.split_once("//").unwrap();
 
                 for header in collected_headers.iter() {
-                    if line_buf == *header {
+                    if line_buf.replace("\r", "").replace("\n", "") == *header {
                         write!(tmp_file, "{}//@{}", before, after)?;
                         continue 'line;
                     }
