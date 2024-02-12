@@ -17,7 +17,7 @@ fn main() -> anyhow::Result<()> {
     info!("compiletest -> ui_test header migration tool");
     info!("usage: cargo r -- $PATH_TO_RUSTC_REPO");
 
-    const TARGET: &str = "x86_64-apple-darwin";
+    const TARGET: &str = env!("TARGET");
 
     let rustc_repo_path = std::env::args()
         .nth(1)
