@@ -80,23 +80,9 @@ fn main() -> anyhow::Result<()> {
         }
     }
 
-    // Tidy requires `// ignore-tidy` or `// ignore-tidy-<whatever>` style comments, not `ui_test`
-    // style comments.
-    let is_ignore_tidy = |header: &str| {
-        let header = header.trim();
-        let (_, post) = header.split_once("//").unwrap();
-        let post = post.trim();
-        if post.starts_with("ignore-tidy") {
-            return true;
-        }
-
-        false
-    };
-
     collected_headers.retain(|header| {
         !header.trim().is_empty() // skip empty header
         && header.trim() != "//" // skip empty comment
-        && !is_ignore_tidy(&header) // skip `// ignore-tidy` or `// ignore-tidy-<whatever>`
     });
 
     info!("there are {} collected headers", collected_headers.len());
