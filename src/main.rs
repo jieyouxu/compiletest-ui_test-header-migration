@@ -54,7 +54,8 @@ fn main() -> anyhow::Result<()> {
         }
         Command::CollectDirectiveNames { path_to_rustc } => {
             let collected_headers = collect_headers(path_to_rustc.as_path())?;
-            println!("{:?}", collected_headers);
+            let directive_names = extract_directive_names(&collected_headers)?;
+            println!("{:?}", directive_names.iter().collect::<Vec<_>>());
         }
     }
 
@@ -197,4 +198,79 @@ fn migrate_ui_tests(
     }
 
     Ok(())
+}
+
+fn extract_directive_names(
+    collected_directives: &BTreeSet<String>,
+) -> anyhow::Result<BTreeSet<String>> {
+    let mut ret = BTreeSet::new();
+
+    for raw_directive in collected_directives {
+        // Directives can take the forms:
+        // 1. `// name` or with value or with comments:
+        //     - `// name: <rest>`
+        //     - `// name <rest>`
+        // 2. `//[rev] name` or with value or with commments:
+        //     - `//[rev] name: ...`
+        //     - `//[rev] name ...`
+        // There may be arbitrary whitespace between `//`, `[rev]` and `name`.
+
+        // First, let's get rid of the `//`.
+        let (leading, rest) = raw_directive.split_once("//").unwrap();
+        assert!(
+            leading.trim().is_empty(),
+            "expected directive to be leading in the line, there's a bug in the collection script"
+        );
+        let rest = rest.trim_start();
+
+        // Then, let's get rid of revisions.
+        let mut rest = if let Some(lbracket_pos) = rest.find('[')
+            && rest.starts_with('[')
+        {
+            let Some(rbracket_pos) = rest.find(']') else {
+                error!(
+                    ?raw_directive,
+                    ?lbracket_pos,
+                    "weird directive: `{:?}`",
+                    rest
+                );
+                panic!("directive found with unpaired [] delimiters");
+            };
+            if lbracket_pos > rbracket_pos {
+                error!(
+                    ?raw_directive,
+                    ?lbracket_pos,
+                    ?rbracket_pos,
+                    "weird directive: `{:?}`",
+                    rest
+                );
+            }
+            assert!(lbracket_pos <= rbracket_pos);
+            let rest = &rest[(rbracket_pos + 1)..];
+            rest.trim_start()
+        } else {
+            rest.trim_start()
+        };
+
+        // Special case: one of the test files has some weird syntax like
+        // `// [rev]: directive-name`...
+        if rest.starts_with(':') {
+            // ... so skip that pesky colon.
+            rest = &rest[1..];
+            rest = rest.trim_start();
+        }
+
+        // Now, let's extract the directive name.
+        let directive_name = if let Some((directive_name, _)) = rest.split_once([':', ' ']) {
+            directive_name.trim()
+        } else {
+            let directive_name = rest;
+            assert!(!directive_name.trim().contains([' ']));
+            directive_name.trim()
+        };
+
+        ret.insert(directive_name.to_owned());
+    }
+
+    Ok(ret)
 }
