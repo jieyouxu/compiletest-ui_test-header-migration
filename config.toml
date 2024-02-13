@@ -1,0 +1,7 @@
+# Manually specify directives. This is mostly used to override some special tests that are
+# not properly handled by the collection script.
+#
+# Default value: []
+manual_directives = [
+	"// should-fail"
+]

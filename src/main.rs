@@ -8,6 +8,7 @@ use anyhow::Context;
 use clap::{Parser, Subcommand};
 use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
 use tracing::*;
+use confique::{Config as ConfigParser, toml::FormatOptions};
 
 mod logging;
 
@@ -41,15 +42,32 @@ pub(crate) enum Command {
     },
 }
 
+#[derive(Debug, ConfigParser)]
+pub(crate) struct Config {
+    /// Manually specify directives. This is mostly used to override some special tests that are
+    /// not properly handled by the collection script.
+    #[config(default = [])]
+    pub(crate) manual_directives: Vec<String>,
+}
+
 fn main() -> anyhow::Result<()> {
     logging::setup_logging();
+
+    let config_path = PathBuf::from("config.toml");
+    if !config_path.exists() {
+        let template = confique::toml::template::<Config>(FormatOptions::default());
+        std::fs::write(&config_path, template)?;
+    }
+    let config = Config::from_file(&config_path)?;
+    debug!(?config);
 
     let cli = Cli::parse();
     debug!(?cli);
 
     match &cli.command {
         Command::Migrate { path_to_rustc } => {
-            let collected_headers = collect_headers(path_to_rustc.as_path())?;
+            let mut collected_headers = collect_headers(path_to_rustc.as_path())?;
+            collected_headers.extend(config.manual_directives);
             migrate_ui_tests(path_to_rustc.as_path(), &collected_headers)?;
         }
         Command::CollectDirectiveNames { path_to_rustc } => {

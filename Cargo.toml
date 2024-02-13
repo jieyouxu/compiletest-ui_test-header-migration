@@ -10,7 +10,9 @@ build = "build.rs"
 [dependencies]
 anyhow = "1.0.79"
 clap = { version = "4.5.0", features = ["derive"] }
+confique = { version = "0.2.5", features = ["toml"], default-features = false }
 indicatif = "0.17.7"
+serde = "1.0.196"
 tempfile = "3.10.0"
 tracing = { version = "0.1.40", features = ["attributes"] }
 tracing-appender = "0.2.3"
