@@ -9,6 +9,7 @@ build = "build.rs"
 
 [dependencies]
 anyhow = "1.0.79"
+clap = { version = "4.5.0", features = ["derive"] }
 indicatif = "0.17.7"
 tempfile = "3.10.0"
 tracing = { version = "0.1.40", features = ["attributes"] }
