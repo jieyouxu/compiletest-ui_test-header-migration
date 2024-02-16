@@ -167,7 +167,11 @@ fn migrate_ui_tests(
         .into_iter()
         .filter_map(Result::ok)
         .filter(|e| {
-            !e.file_type().is_dir() && e.path().extension().map(|s| s == "rs").unwrap_or(false)
+            !e.file_type().is_dir()
+                && e.path()
+                    .extension()
+                    .map(|s| s == "rs" || s == "fixed")
+                    .unwrap_or(false)
         })
         .map(|e| e.into_path());
 
