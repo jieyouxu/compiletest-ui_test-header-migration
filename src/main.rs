@@ -101,7 +101,6 @@ fn collect_headers(path_to_rustc: &Path) -> anyhow::Result<BTreeSet<String>> {
     collected_headers_path.push("build");
     collected_headers_path.push(TARGET);
     collected_headers_path.push("test");
-    collected_headers_path.push("ui");
     collected_headers_path.push("__directive_lines");
 
     // Load collected headers (mainly EarlyProps)
@@ -117,6 +116,7 @@ fn collect_headers(path_to_rustc: &Path) -> anyhow::Result<BTreeSet<String>> {
     collected_headers.retain(|header| {
         !header.trim().is_empty() // skip empty header
         && header.trim() != "//" // skip empty comment
+        && !header.trim().starts_with('#') // skip makefile headers
     });
 
     info!("there are {} collected headers", collected_headers.len());
@@ -219,7 +219,9 @@ fn extract_directive_names(
         // There may be arbitrary whitespace between `//`, `[rev]` and `name`.
 
         // First, let's get rid of the `//`.
-        let (leading, rest) = raw_directive.split_once("//").unwrap();
+        let Some((leading, rest)) = raw_directive.split_once("//") else {
+            bail!("failed to split `{}`", raw_directive);
+        };
         assert!(
             leading.trim().is_empty(),
             "expected directive to be leading in the line, there's a bug in the collection script"
