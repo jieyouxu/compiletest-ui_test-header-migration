@@ -79,10 +79,11 @@ fn main() -> anyhow::Result<()> {
         Command::Migrate { path_to_rustc } => {
             let mut collected_headers = collect_headers(path_to_rustc.as_path())?;
             collected_headers.extend(config.manual_directives);
-            migrate_ui_tests(path_to_rustc.as_path(), &collected_headers)?;
+            migrate_compiletest_tests(path_to_rustc.as_path(), &collected_headers)?;
         }
         Command::CollectDirectiveNames { path_to_rustc } => {
-            let collected_headers = collect_headers(path_to_rustc.as_path())?;
+            let mut collected_headers = collect_headers(path_to_rustc.as_path())?;
+            collected_headers.extend(config.manual_directives);
             let directive_names = extract_directive_names(&collected_headers)?;
             println!("{:?}", directive_names.iter().collect::<Vec<_>>());
         }
@@ -113,7 +114,7 @@ fn collect_headers(path_to_rustc: &Path) -> anyhow::Result<BTreeSet<String>> {
         .map(ToOwned::to_owned)
         .collect::<BTreeSet<String>>();
 
-    // Load collected headers (from TestProps collected from each ran UI test)
+    // Load collected headers (from TestProps collected from each ran compiletest test)
     let collected_headers_walker = walkdir::WalkDir::new(collected_headers_path.with_extension(""))
         .sort_by_file_name()
         .into_iter()
@@ -157,12 +158,12 @@ fn collect_headers(path_to_rustc: &Path) -> anyhow::Result<BTreeSet<String>> {
     Ok(collected_headers)
 }
 
-fn migrate_ui_tests(
+fn migrate_compiletest_tests(
     path_to_rustc: &Path,
     collected_headers: &BTreeSet<String>,
 ) -> anyhow::Result<()> {
-    // Collect paths of ui test files
-    let walker = walkdir::WalkDir::new(path_to_rustc.join("tests").join("ui"))
+    // Collect paths of compiletest test files
+    let walker = walkdir::WalkDir::new(path_to_rustc.join("tests"))
         .sort_by_file_name()
         .into_iter()
         .filter_map(Result::ok)
@@ -178,27 +179,27 @@ fn migrate_ui_tests(
     let mut test_file_paths = walker.collect::<Vec<_>>();
     test_file_paths.sort();
 
-    info!("there are {} ui test files", test_file_paths.len());
+    info!("there are {} compiletest test files", test_file_paths.len());
 
     let pb = ProgressBar::new(test_file_paths.len() as u64);
     pb.set_style(
         ProgressStyle::with_template(
-            "migrating ui tests: {spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] ({pos}/{len}, ETA {eta})",
+            "migrating compiletest tests: {spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] ({pos}/{len}, ETA {eta})",
         )
         .unwrap(),
     );
 
     for path in test_file_paths.iter().progress_with(pb) {
         debug!(?path, "processing file");
-        // - Read the contents of the ui test file
+        // - Read the contents of the compiletest test file
         // - Open a named temporary file
-        // - Process each line of the ui test:
+        // - Process each line of the compiletest test:
         //     - If line starts with "//", try to match it with one of the collected directives.
         //       If a match is found, replace "//" with "//@" and append line to temp file.
         //     - Otherwise, append line verbatim to temp file.
-        // - Replace original ui test with temp file.
-        let ui_test_file = std::fs::File::open(&path)?;
-        let mut reader = std::io::BufReader::new(ui_test_file);
+        // - Replace original compiletest test with temp file.
+        let compiletest_test_file = std::fs::File::open(&path)?;
+        let mut reader = std::io::BufReader::new(compiletest_test_file);
 
         let mut tmp_file = tempfile::NamedTempFile::new()?;
 
