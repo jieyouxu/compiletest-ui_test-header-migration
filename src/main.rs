@@ -105,48 +105,14 @@ fn collect_headers(path_to_rustc: &Path) -> anyhow::Result<BTreeSet<String>> {
     collected_headers_path.push("__directive_lines");
 
     // Load collected headers (mainly EarlyProps)
-    debug!(early_headers_path = ?collected_headers_path.with_extension("txt"));
-    let early_collected_headers =
+    debug!(headers_path = ?collected_headers_path.with_extension("txt"));
+    let collected_headers =
         std::fs::read_to_string(collected_headers_path.with_extension("txt"))
             .context("failed to read collected headers")?;
-    let mut collected_headers = early_collected_headers
+    let mut collected_headers = collected_headers
         .lines()
         .map(ToOwned::to_owned)
         .collect::<BTreeSet<String>>();
-
-    // Load collected headers (from TestProps collected from each ran compiletest test)
-    let collected_headers_walker = walkdir::WalkDir::new(collected_headers_path.with_extension(""))
-        .sort_by_file_name()
-        .into_iter()
-        .filter_map(Result::ok)
-        .filter(|e| !e.file_type().is_dir())
-        .map(|e| e.into_path());
-
-    let mut collected_header_paths = collected_headers_walker.collect::<Vec<_>>();
-    collected_header_paths.sort();
-
-    info!(
-        "there are {} collected header files",
-        collected_header_paths.len()
-    );
-
-    let pb = ProgressBar::new(collected_header_paths.len() as u64);
-    pb.set_style(
-        ProgressStyle::with_template(
-            "collecting headers: {spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] ({pos}/{len}, ETA {eta})",
-        )
-        .unwrap(),
-    );
-
-    for path in collected_header_paths.iter().progress_with(pb) {
-        debug!(?path, "processing collected header");
-        let file = std::fs::File::open(&path)?;
-        let reader = std::io::BufReader::new(file);
-        for line in reader.lines() {
-            let line = line?;
-            collected_headers.insert(line);
-        }
-    }
 
     collected_headers.retain(|header| {
         !header.trim().is_empty() // skip empty header
