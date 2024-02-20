@@ -173,6 +173,8 @@ fn migrate_compiletest_tests(
                     .extension()
                     .map(|s| s == "rs" || s == "fixed")
                     .unwrap_or(false)
+                // We already migrated ui test suite tests
+                && !e.path().starts_with(path_to_rustc.join("tests").join("ui"))
         })
         .map(|e| e.into_path());
 
