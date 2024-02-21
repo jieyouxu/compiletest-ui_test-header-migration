@@ -105,9 +105,8 @@ fn collect_headers(path_to_rustc: &Path) -> anyhow::Result<BTreeSet<String>> {
 
     // Load collected headers (mainly EarlyProps)
     debug!(headers_path = ?collected_headers_path.with_extension("txt"));
-    let collected_headers =
-        std::fs::read_to_string(collected_headers_path.with_extension("txt"))
-            .context("failed to read collected headers")?;
+    let collected_headers = std::fs::read_to_string(collected_headers_path.with_extension("txt"))
+        .context("failed to read collected headers")?;
     let mut collected_headers = collected_headers
         .lines()
         .map(ToOwned::to_owned)
@@ -228,7 +227,13 @@ fn extract_directive_names(
         );
         let rest = rest.trim_start();
 
-        // Then, let's get rid of revisions.
+        // Then, let's ignore tidy directives.
+        if rest.starts_with("ignore-tidy") {
+            // Not handled by compiletest.
+            continue;
+        }
+
+        // Next, let's get rid of revisions.
         let mut rest = if let Some(lbracket_pos) = rest.find('[')
             && rest.starts_with('[')
         {
