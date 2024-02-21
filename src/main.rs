@@ -116,6 +116,9 @@ fn collect_headers(path_to_rustc: &Path) -> anyhow::Result<BTreeSet<String>> {
         !header.trim().is_empty() // skip empty header
         && header.trim() != "//" // skip empty comment
         && !header.trim().starts_with('#') // skip makefile headers
+        && header.split_once("//").map(|(_, post)| {
+            !post.trim().starts_with("ignore-tidy")
+        }).unwrap_or(true)
     });
 
     info!("there are {} collected headers", collected_headers.len());
@@ -226,12 +229,6 @@ fn extract_directive_names(
             "expected directive to be leading in the line, there's a bug in the collection script"
         );
         let rest = rest.trim_start();
-
-        // Then, let's ignore tidy directives.
-        if rest.starts_with("ignore-tidy") {
-            // Not handled by compiletest.
-            continue;
-        }
 
         // Next, let's get rid of revisions.
         let mut rest = if let Some(lbracket_pos) = rest.find('[')
