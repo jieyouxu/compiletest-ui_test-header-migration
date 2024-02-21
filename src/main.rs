@@ -263,19 +263,22 @@ fn migrate_coverage_maps(
                 break;
             }
 
-            if line_buf.starts_with("   ll|       |")
-                && let Some((pre, post)) = line_buf.split_once("   ll|       |")
+            if line_buf.starts_with("   LL|       |")
+                && let Some((pre, post)) = line_buf.split_once("   LL|       |")
             {
                 if !pre.is_empty() {
                     error!(path = %path.display(), ?line_buf, "pre not empty: `{}`", pre);
                     bail!("wtf?");
                 }
-                let post = post.trim_start();
 
-                if let Some((pre, post)) = post.split_once("//") {
+                if let Some((inner_pre, inner_post)) = post.split_once("//") {
                     for directive in collected_directives.iter() {
                         if post.replace("\r", "").replace("\n", "") == *directive {
-                            write!(tmp_file, "{}//@{}", pre, post)?;
+                            write!(
+                                tmp_file,
+                                "{}   LL|       |{}//@{}",
+                                pre, inner_pre, inner_post
+                            )?;
                             continue 'line;
                         }
                     }
