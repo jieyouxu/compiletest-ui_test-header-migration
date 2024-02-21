@@ -263,8 +263,13 @@ fn migrate_coverage_maps(
                 break;
             }
 
-            if let Some((pre, post)) = line_buf.split_once("   LL|       |") {
-                assert!(pre.is_empty());
+            if line_buf.starts_with("   ll|       |")
+                && let Some((pre, post)) = line_buf.split_once("   ll|       |")
+            {
+                if !pre.is_empty() {
+                    error!(path = %path.display(), ?line_buf, "pre not empty: `{}`", pre);
+                    bail!("wtf?");
+                }
                 let post = post.trim_start();
 
                 if let Some((pre, post)) = post.split_once("//") {
@@ -287,7 +292,7 @@ fn migrate_coverage_maps(
         tmp_path.persist(path)?;
     }
 
-    todo!()
+    Ok(())
 }
 
 fn extract_directive_names(
