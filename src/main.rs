@@ -274,14 +274,16 @@ fn migrate_coverage_maps(
                 }
 
                 if let Some((inner_pre, inner_post)) = post.split_once("//") {
-                    for directive in collected_directives.iter() {
-                        if post.replace("\r", "").replace("\n", "") == *directive {
-                            write!(
-                                tmp_file,
-                                "{}   LL|       |{}//@{}",
-                                pre, inner_pre, inner_post
-                            )?;
-                            continue 'line;
+                    if !inner_post.starts_with('@') {
+                        for directive in collected_directives.iter() {
+                            if post.replace("\r", "").replace("\n", "") == *directive {
+                                write!(
+                                    tmp_file,
+                                    "{}   LL|       |{}//@{}",
+                                    pre, inner_pre, inner_post
+                                )?;
+                                continue 'line;
+                            }
                         }
                     }
                 }
