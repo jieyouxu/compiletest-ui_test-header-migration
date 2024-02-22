@@ -186,10 +186,12 @@ fn migrate_compiletest_tests(
             if line_buf.trim_start().starts_with("//") {
                 let (before, after) = line_buf.split_once("//").unwrap();
 
-                for directive in collected_directives.iter() {
-                    if line_buf.replace("\r", "").replace("\n", "") == *directive {
-                        write!(tmp_file, "{}//@{}", before, after)?;
-                        continue 'line;
+                if !after.starts_with('@') {
+                    for directive in collected_directives.iter() {
+                        if line_buf.replace("\r", "").replace("\n", "") == *directive {
+                            write!(tmp_file, "{}//@{}", before, after)?;
+                            continue 'line;
+                        }
                     }
                 }
 
@@ -322,6 +324,7 @@ fn extract_directive_names(
             "expected directive to be leading in the line, there's a bug in the collection script"
         );
         let rest = rest.trim_start();
+        let rest = rest.trim_start_matches('@');
 
         // Next, let's get rid of revisions.
         let mut rest = if let Some(lbracket_pos) = rest.find('[')
