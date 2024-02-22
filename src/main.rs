@@ -224,8 +224,9 @@ fn migrate_coverage_maps(
                     .extension()
                     .map(|s| s == "coverage")
                     .unwrap_or(false)
-                // Only search in tests/coverage
-                && e.path().starts_with(path_to_rustc.join("tests").join("coverage"))
+                // Only search in tests/{coverage,coverage-run-rustdoc}
+                && (e.path().starts_with(path_to_rustc.join("tests").join("coverage")) ||
+                    e.path().starts_with(path_to_rustc.join("tests").join("coverage-run-rustdoc")))
         })
         .map(|e| e.into_path());
 
